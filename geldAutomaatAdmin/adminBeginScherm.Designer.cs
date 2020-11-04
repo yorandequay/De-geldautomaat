@@ -44,6 +44,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.bankNumberTxb = new System.Windows.Forms.TextBox();
+            this.blockedChk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -118,6 +119,8 @@
             this.userDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.userDgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.userDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.userDgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.blockedChk});
             this.userDgv.Location = new System.Drawing.Point(248, 40);
             this.userDgv.Name = "userDgv";
             this.userDgv.RowHeadersWidth = 51;
@@ -216,6 +219,12 @@
             this.bankNumberTxb.Size = new System.Drawing.Size(100, 22);
             this.bankNumberTxb.TabIndex = 6;
             // 
+            // blockedChk
+            // 
+            this.blockedChk.HeaderText = "blocked";
+            this.blockedChk.MinimumWidth = 6;
+            this.blockedChk.Name = "blockedChk";
+            // 
             // adminBeginScherm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -254,6 +263,7 @@
         private System.Windows.Forms.TextBox bankNumberTxb;
         private System.Windows.Forms.TextBox searchTxb;
         private System.Windows.Forms.ComboBox searchCb;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn blockedChk;
     }
 }
 

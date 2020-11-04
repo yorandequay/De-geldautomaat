@@ -20,6 +20,7 @@ namespace geldAutomaatAdmin
             InitializeComponent();
             userDgv.DataSource = user.getUsers();
             userDgv.Columns["userID"].Visible = false;
+            userDgv.Columns["blocked"].Visible = false;
             searchCb.SelectedItem = "firstName";
         }
 
@@ -37,11 +38,13 @@ namespace geldAutomaatAdmin
 
         private void UserDgv_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            int userID = Convert.ToInt32(userDgv.Rows[userDgv.CurrentRow.Index].Cells[0].Value.ToString());
-            string firstName = userDgv.Rows[userDgv.CurrentRow.Index].Cells[1].Value.ToString();
-            string lastName = userDgv.Rows[userDgv.CurrentRow.Index].Cells[2].Value.ToString();
-            string bankNumber = userDgv.Rows[userDgv.CurrentRow.Index].Cells[3].Value.ToString();
+            int userID = Convert.ToInt32(userDgv.Rows[userDgv.CurrentRow.Index].Cells[1].Value.ToString());
+            string firstName = userDgv.Rows[userDgv.CurrentRow.Index].Cells[2].Value.ToString();
+            string lastName = userDgv.Rows[userDgv.CurrentRow.Index].Cells[3].Value.ToString();
+            string bankNumber = userDgv.Rows[userDgv.CurrentRow.Index].Cells[4].Value.ToString();
+            bool blockedChk = Convert.ToBoolean(userDgv.Rows[userDgv.CurrentRow.Index].Cells[0].Value);
             user.updateUser(userID, firstName, lastName, bankNumber);
+            user.blockUser(userID, blockedChk);
         }
 
         private void SearchTxb_TextChanged(object sender, EventArgs e)

@@ -43,7 +43,7 @@ namespace ClassLibrary
             public static string BankNumber;
             public static string FirstName;
             public static string LastName;
-            public static int Balance;
+            public static float Balance;
             public static int Role;
             public static int transactionLimit = 0;
         }

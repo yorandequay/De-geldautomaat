@@ -94,12 +94,17 @@ namespace ClassLibrary
                             // Checks if the typed in username is the same username and compares the password hash from the database with the password hash from the typed in login password.
                             if (loginBankNumber == (string)User["bankNumber"] && GlobalMethods.CompareByteArrays(UserPasswordHash, LoginPasswordHash))
                             {
+                                if (Convert.ToInt32(User["blocked"].ToString()) == 1)
+                                {
+                                    MessageBox.Show("Uw account is geblokkeerd, neem contact op met een bankmedewerker.");
+                                    return false;
+                                }
                                 // Stores user information in global methods. In admin_supermarket it first checks if the value isn't null.
                                 GlobalMethods.LoginInfo.UserID = (int)User["userID"];
                                 GlobalMethods.LoginInfo.FirstName = (string)User["firstName"];
                                 GlobalMethods.LoginInfo.LastName = (string)User["lastName"];
                                 GlobalMethods.LoginInfo.BankNumber = (string)User["bankNumber"];
-                                GlobalMethods.LoginInfo.Balance = (int)User["balance"];
+                                GlobalMethods.LoginInfo.Balance = (float)User["balance"];
                                 GlobalMethods.LoginInfo.Role = (int)User["role"];
                                 MessageBox.Show("U gegevens waren correct welkom " + (string)User["firstName"]);
                                 return true;
@@ -136,7 +141,7 @@ namespace ClassLibrary
                         GlobalMethods.LoginInfo.FirstName = (string)User["firstName"];
                         GlobalMethods.LoginInfo.LastName = (string)User["lastName"];
                         GlobalMethods.LoginInfo.BankNumber = (string)User["bankNumber"];
-                        GlobalMethods.LoginInfo.Balance = (int)User["balance"];
+                        GlobalMethods.LoginInfo.Balance = (float)User["balance"];
                         GlobalMethods.LoginInfo.Role = (int)User["role"];
                     }
                 }
@@ -149,7 +154,7 @@ namespace ClassLibrary
         // Retrieves all users
         public DataTable getUsers()
         {
-            DataTable GetUsers = dataLayer.Query("SELECT userID, firstName, lastName, bankNumber FROM user",
+            DataTable GetUsers = dataLayer.Query("SELECT userID, firstName, lastName, bankNumber, blocked FROM user",
             p =>
             {
             });
@@ -188,6 +193,28 @@ namespace ClassLibrary
             catch (Exception e) // Catches any errors
             {
                 MessageBox.Show("Error: " + e);
+            }
+        }
+        // Blocks user if checked in the datagridview
+        public void blockUser(int userID, bool blockedChk)
+        {
+            if (blockedChk == true)
+            {
+                dataLayer.Query("UPDATE user SET blocked = @Blocked WHERE userID = @UserID;",
+                p =>
+                {
+                    p.Add("@UserID", MySqlDbType.Int32, 55).Value = userID;
+                    p.Add("@Blocked", MySqlDbType.Int32, 2).Value = 1;
+                });
+            }
+            else
+            {
+                dataLayer.Query("UPDATE user SET blocked = @Blocked WHERE userID = @UserID;",
+                p =>
+                {
+                    p.Add("@UserID", MySqlDbType.Int32, 55).Value = userID;
+                    p.Add("@Blocked", MySqlDbType.Int32, 2).Value = 0;
+                });
             }
         }
     }
