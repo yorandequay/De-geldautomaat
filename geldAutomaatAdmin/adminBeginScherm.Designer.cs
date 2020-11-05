@@ -31,6 +31,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.searchCb = new System.Windows.Forms.ComboBox();
             this.searchTxb = new System.Windows.Forms.TextBox();
             this.userDgv = new System.Windows.Forms.DataGridView();
@@ -44,7 +45,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.bankNumberTxb = new System.Windows.Forms.TextBox();
-            this.blockedChk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.blockBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -75,6 +76,8 @@
             // 
             this.panel4.AutoSize = true;
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(23)))), ((int)(((byte)(31)))));
+            this.panel4.Controls.Add(this.blockBtn);
+            this.panel4.Controls.Add(this.btnDelete);
             this.panel4.Controls.Add(this.searchCb);
             this.panel4.Controls.Add(this.searchTxb);
             this.panel4.Controls.Add(this.userDgv);
@@ -93,6 +96,16 @@
             this.panel4.Size = new System.Drawing.Size(627, 267);
             this.panel4.TabIndex = 14;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(304, 8);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(96, 23);
+            this.btnDelete.TabIndex = 14;
+            this.btnDelete.Text = "Verwijder";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
+            // 
             // searchCb
             // 
             this.searchCb.FormattingEnabled = true;
@@ -100,9 +113,9 @@
             "firstName",
             "lastName",
             "bankNumber"});
-            this.searchCb.Location = new System.Drawing.Point(384, 8);
+            this.searchCb.Location = new System.Drawing.Point(408, 8);
             this.searchCb.Name = "searchCb";
-            this.searchCb.Size = new System.Drawing.Size(121, 24);
+            this.searchCb.Size = new System.Drawing.Size(97, 24);
             this.searchCb.TabIndex = 13;
             // 
             // searchTxb
@@ -119,16 +132,14 @@
             this.userDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.userDgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.userDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.userDgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.blockedChk});
             this.userDgv.Location = new System.Drawing.Point(248, 40);
             this.userDgv.Name = "userDgv";
             this.userDgv.RowHeadersWidth = 51;
             this.userDgv.RowTemplate.Height = 24;
             this.userDgv.Size = new System.Drawing.Size(376, 224);
             this.userDgv.TabIndex = 11;
+            this.userDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDgv_CellClick);
             this.userDgv.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDgv_CellEndEdit);
-            this.userDgv.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.UserDgv_UserDeletingRow);
             // 
             // label1
             // 
@@ -219,11 +230,15 @@
             this.bankNumberTxb.Size = new System.Drawing.Size(100, 22);
             this.bankNumberTxb.TabIndex = 6;
             // 
-            // blockedChk
+            // blockBtn
             // 
-            this.blockedChk.HeaderText = "blocked";
-            this.blockedChk.MinimumWidth = 6;
-            this.blockedChk.Name = "blockedChk";
+            this.blockBtn.Location = new System.Drawing.Point(176, 8);
+            this.blockBtn.Name = "blockBtn";
+            this.blockBtn.Size = new System.Drawing.Size(123, 23);
+            this.blockBtn.TabIndex = 15;
+            this.blockBtn.Text = "Block/Unblock";
+            this.blockBtn.UseVisualStyleBackColor = true;
+            this.blockBtn.Click += new System.EventHandler(this.BlockBtn_Click);
             // 
             // adminBeginScherm
             // 
@@ -235,6 +250,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "adminBeginScherm";
             this.Text = "Geldautomaat admin";
+            this.Load += new System.EventHandler(this.AdminBeginScherm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -263,7 +279,8 @@
         private System.Windows.Forms.TextBox bankNumberTxb;
         private System.Windows.Forms.TextBox searchTxb;
         private System.Windows.Forms.ComboBox searchCb;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn blockedChk;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button blockBtn;
     }
 }
 

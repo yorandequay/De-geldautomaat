@@ -36,6 +36,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.lblUsername = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -121,11 +122,21 @@
             this.panel4.Size = new System.Drawing.Size(624, 264);
             this.panel4.TabIndex = 10;
             // 
+            // lblUsername
+            // 
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(167)))), ((int)(((byte)(225)))));
+            this.lblUsername.Location = new System.Drawing.Point(184, 8);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(0, 17);
+            this.lblUsername.TabIndex = 11;
+            // 
             // geldOpnemen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -151,5 +162,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblUsername;
     }
 }

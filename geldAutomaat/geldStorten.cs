@@ -18,6 +18,7 @@ namespace geldAutomaat
         public geldStorten()
         {
             InitializeComponent();
+            lblUsername.Text = "Welkom: " + GlobalMethods.LoginInfo.FirstName + " " + GlobalMethods.LoginInfo.LastName;
         }
 
         private void DepositBtn_Click(object sender, EventArgs e)

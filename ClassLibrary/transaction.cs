@@ -43,14 +43,14 @@ namespace ClassLibrary
                         p =>
                         {
                             p.Add("@UserID", MySqlDbType.Int32, 55).Value = GlobalMethods.LoginInfo.UserID;
-                            p.Add("@Balance", MySqlDbType.Int32, 55).Value = Convert.ToInt32(withdrawAmount);
+                            p.Add("@Balance", MySqlDbType.Decimal, 65).Value = Convert.ToDecimal(withdrawAmount);
                         });
                         dataLayer.Query("INSERT INTO `transaction` (userID, transactionType, transactionAmount) VALUES (@UserID, @TransactionType, @TransactionAmount);",
                         p =>
                         {
                             p.Add("@UserID", MySqlDbType.Int32, 55).Value = GlobalMethods.LoginInfo.UserID;
                             p.Add("@TransactionType", MySqlDbType.Int32, 55).Value = 0;
-                            p.Add("@TransactionAmount", MySqlDbType.Int32, 55).Value = withdrawAmount;
+                            p.Add("@TransactionAmount", MySqlDbType.Decimal, 55).Value = withdrawAmount;
                         });
                     }
                 }
@@ -69,14 +69,14 @@ namespace ClassLibrary
                 p =>
                 {
                     p.Add("@UserID", MySqlDbType.Int32, 55).Value = GlobalMethods.LoginInfo.UserID;
-                    p.Add("@Balance", MySqlDbType.Int32, 55).Value = Convert.ToInt32(depositAmount);
+                    p.Add("@Balance", MySqlDbType.Decimal, 65).Value = Convert.ToDecimal(depositAmount);
                 });
                 dataLayer.Query("INSERT INTO `transaction` (userID, transactionType, transactionAmount) VALUES (@UserID, @TransactionType, @TransactionAmount);",
                 p =>
                 {
                     p.Add("@UserID", MySqlDbType.Int32, 55).Value = GlobalMethods.LoginInfo.UserID;
                     p.Add("@TransactionType", MySqlDbType.Int32, 55).Value = 1;
-                    p.Add("@TransactionAmount", MySqlDbType.Int32, 55).Value = depositAmount;
+                    p.Add("@TransactionAmount", MySqlDbType.Decimal, 55).Value = Convert.ToDecimal(depositAmount);
                 });
             }
             catch (Exception e) // Catches any errors.

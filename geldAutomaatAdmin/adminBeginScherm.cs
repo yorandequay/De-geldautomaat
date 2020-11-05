@@ -20,36 +20,55 @@ namespace geldAutomaatAdmin
             InitializeComponent();
             userDgv.DataSource = user.getUsers();
             userDgv.Columns["userID"].Visible = false;
-            userDgv.Columns["blocked"].Visible = false;
+            //userDgv.Columns["blocked"].Visible = false;
             searchCb.SelectedItem = "firstName";
+            userDgv.CurrentCell = null;
         }
 
         private void RegisterBtn_Click(object sender, EventArgs e)
         {
             user.addAcount(firstNameTxb.Text, lastNameTxb.Text, bankNumberTxb.Text, passwordTxb.Text);
             userDgv.DataSource = user.getUsers();
-        }
-
-        private void UserDgv_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-        {
-            int userID = Convert.ToInt32(userDgv.Rows[userDgv.CurrentRow.Index].Cells[0].Value.ToString());
-            user.deleteUser(userID);
+            userDgv.CurrentCell = null;
         }
 
         private void UserDgv_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            int userID = Convert.ToInt32(userDgv.Rows[userDgv.CurrentRow.Index].Cells[1].Value.ToString());
-            string firstName = userDgv.Rows[userDgv.CurrentRow.Index].Cells[2].Value.ToString();
-            string lastName = userDgv.Rows[userDgv.CurrentRow.Index].Cells[3].Value.ToString();
-            string bankNumber = userDgv.Rows[userDgv.CurrentRow.Index].Cells[4].Value.ToString();
-            bool blockedChk = Convert.ToBoolean(userDgv.Rows[userDgv.CurrentRow.Index].Cells[0].Value);
-            user.updateUser(userID, firstName, lastName, bankNumber);
-            user.blockUser(userID, blockedChk);
+            user.updateUser(GlobalMethods.SelectedRow.RowID, GlobalMethods.SelectedRow.FirstName,
+                GlobalMethods.SelectedRow.LastName, GlobalMethods.SelectedRow.BankNumber);
         }
 
         private void SearchTxb_TextChanged(object sender, EventArgs e)
         {
             (userDgv.DataSource as DataTable).DefaultView.RowFilter = string.Format(searchCb.SelectedItem.ToString() + " LIKE '%{0}%'", searchTxb.Text);
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            user.deleteUser(GlobalMethods.SelectedRow.RowID);
+            userDgv.DataSource = user.getUsers();
+            userDgv.CurrentCell = null;
+        }
+
+        private void UserDgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            GlobalMethods.SelectedRow.RowID = Convert.ToInt32(userDgv.Rows[userDgv.CurrentRow.Index].Cells[0].Value.ToString());
+            GlobalMethods.SelectedRow.FirstName = userDgv.Rows[userDgv.CurrentRow.Index].Cells[1].Value.ToString();
+            GlobalMethods.SelectedRow.LastName = userDgv.Rows[userDgv.CurrentRow.Index].Cells[2].Value.ToString();
+            GlobalMethods.SelectedRow.BankNumber = userDgv.Rows[userDgv.CurrentRow.Index].Cells[3].Value.ToString();
+            GlobalMethods.SelectedRow.Blocked = Convert.ToInt32(userDgv.Rows[userDgv.CurrentRow.Index].Cells[4].Value.ToString());
+        }
+
+        private void BlockBtn_Click(object sender, EventArgs e)
+        {
+            user.blockUser(GlobalMethods.SelectedRow.RowID, GlobalMethods.SelectedRow.Blocked);
+            userDgv.DataSource = user.getUsers();
+            userDgv.CurrentCell = null;
+        }
+
+        private void AdminBeginScherm_Load(object sender, EventArgs e)
+        {
+            userDgv.CurrentCell = null;
         }
     }
 }

@@ -30,12 +30,13 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.depositBtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.depositTxb = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.lblUsername = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -63,6 +64,16 @@
             this.depositBtn.UseVisualStyleBackColor = true;
             this.depositBtn.Click += new System.EventHandler(this.DepositBtn_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.Control;
+            this.label1.Location = new System.Drawing.Point(8, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(177, 17);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "U kunt hier uw geld storten";
+            // 
             // depositTxb
             // 
             this.depositTxb.Location = new System.Drawing.Point(8, 72);
@@ -80,16 +91,6 @@
             this.label2.Size = new System.Drawing.Size(58, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Bedrag:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(8, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(177, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "U kunt hier uw geld storten";
             // 
             // pictureBox1
             // 
@@ -121,11 +122,21 @@
             this.panel4.Size = new System.Drawing.Size(624, 264);
             this.panel4.TabIndex = 10;
             // 
+            // lblUsername
+            // 
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(167)))), ((int)(((byte)(225)))));
+            this.lblUsername.Location = new System.Drawing.Point(184, 8);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(0, 17);
+            this.lblUsername.TabIndex = 12;
+            // 
             // geldStorten
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -151,5 +162,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblUsername;
     }
 }

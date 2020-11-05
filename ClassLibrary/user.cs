@@ -104,7 +104,7 @@ namespace ClassLibrary
                                 GlobalMethods.LoginInfo.FirstName = (string)User["firstName"];
                                 GlobalMethods.LoginInfo.LastName = (string)User["lastName"];
                                 GlobalMethods.LoginInfo.BankNumber = (string)User["bankNumber"];
-                                GlobalMethods.LoginInfo.Balance = (float)User["balance"];
+                                GlobalMethods.LoginInfo.Balance = (decimal)User["balance"];
                                 GlobalMethods.LoginInfo.Role = (int)User["role"];
                                 MessageBox.Show("U gegevens waren correct welkom " + (string)User["firstName"]);
                                 return true;
@@ -141,7 +141,7 @@ namespace ClassLibrary
                         GlobalMethods.LoginInfo.FirstName = (string)User["firstName"];
                         GlobalMethods.LoginInfo.LastName = (string)User["lastName"];
                         GlobalMethods.LoginInfo.BankNumber = (string)User["bankNumber"];
-                        GlobalMethods.LoginInfo.Balance = (float)User["balance"];
+                        GlobalMethods.LoginInfo.Balance = (decimal)User["balance"];
                         GlobalMethods.LoginInfo.Role = (int)User["role"];
                     }
                 }
@@ -196,25 +196,34 @@ namespace ClassLibrary
             }
         }
         // Blocks user if checked in the datagridview
-        public void blockUser(int userID, bool blockedChk)
+        public void blockUser(int userID, int blocked)
         {
-            if (blockedChk == true)
+            try
             {
-                dataLayer.Query("UPDATE user SET blocked = @Blocked WHERE userID = @UserID;",
-                p =>
+                if (blocked == 0)
                 {
-                    p.Add("@UserID", MySqlDbType.Int32, 55).Value = userID;
-                    p.Add("@Blocked", MySqlDbType.Int32, 2).Value = 1;
-                });
+                    dataLayer.Query("UPDATE user SET blocked = @Blocked WHERE userID = @UserID;",
+                    p =>
+                    {
+                        p.Add("@UserID", MySqlDbType.Int32, 55).Value = userID;
+                        p.Add("@Blocked", MySqlDbType.Int32, 2).Value = 1;
+                    });
+                    MessageBox.Show("De gebruiker is geblokkeerd");
+                }
+                else
+                {
+                    dataLayer.Query("UPDATE user SET blocked = @Blocked WHERE userID = @UserID;",
+                    p =>
+                    {
+                        p.Add("@UserID", MySqlDbType.Int32, 55).Value = userID;
+                        p.Add("@Blocked", MySqlDbType.Int32, 2).Value = 0;
+                    });
+                    MessageBox.Show("De gebruiker is gedeblokkeerd");
+                }
             }
-            else
+            catch (Exception e) // Catches any errors
             {
-                dataLayer.Query("UPDATE user SET blocked = @Blocked WHERE userID = @UserID;",
-                p =>
-                {
-                    p.Add("@UserID", MySqlDbType.Int32, 55).Value = userID;
-                    p.Add("@Blocked", MySqlDbType.Int32, 2).Value = 0;
-                });
+                MessageBox.Show("Error: " + e);
             }
         }
     }

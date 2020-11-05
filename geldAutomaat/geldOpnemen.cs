@@ -18,6 +18,7 @@ namespace geldAutomaat
         public geldOpnemen()
         {
             InitializeComponent();
+            lblUsername.Text = "Welkom: " + GlobalMethods.LoginInfo.FirstName + " " + GlobalMethods.LoginInfo.LastName;
         }
 
         private void WithdrawBtn_Click(object sender, EventArgs e)

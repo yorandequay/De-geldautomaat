@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -43,9 +44,18 @@ namespace ClassLibrary
             public static string BankNumber;
             public static string FirstName;
             public static string LastName;
-            public static float Balance;
+            public static decimal Balance;
             public static int Role;
             public static int transactionLimit = 0;
+        }
+        // Stores row data in global variables
+        public static class SelectedRow
+        {
+            public static int RowID;
+            public static string FirstName; 
+            public static string LastName; 
+            public static string BankNumber; 
+            public static int Blocked; 
         }
         // Method for switching forms quickly.
         public void SwitchForm(Form previousForm, Form newForm)
@@ -106,18 +116,16 @@ namespace ClassLibrary
         // Can only put numbers into textbox
         public void OnlyNumbers(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
             {
                 e.Handled = true;
             }
 
             // only allow one decimal point
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
             {
                 e.Handled = true;
             }
         }
-        // Searches the datagridview cells
-       // public DataGridView Search(DataGridView userDgv)
     }
 }
